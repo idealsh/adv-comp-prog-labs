@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Interactive To-Do List</title>
+    <style>
+      /* Provided CSS styling */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+
+      li {
+        margin-bottom: 8px;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Provided HTML structure -->
+    <h1>Interactive To-Do List</h1>
+
+    <form>
+      <label for="taskInput">New Task:</label>
+      <input type="text" id="taskInput" placeholder="Enter task" required />
+      <button type="button" onclick="addTask()">Add Task</button>
+    </form>
+
+    <ul id="taskList">
+      <!-- Tasks will be added dynamically here -->
+    </ul>
+
+    <script>
+      // Enter your script here
+
+      /** @type {HTMLInputElement} */
+      const inputField = document.getElementById("taskInput");
+
+      /** @type {HTMLUListElement} */
+      const taskList = document.getElementById("taskList");
+
+      function addTask() {
+        if (inputField.value === "") return;
+
+        const liElem = document.createElement("li");
+        liElem.textContent = inputField.value;
+        liElem.addEventListener("click", () => {
+          const newName = prompt("Rename task to", liElem.textContent);
+
+          if (newName === null) return;
+
+          if (newName === "") taskList.removeChild(liElem);
+          else liElem.textContent = newName;
+        });
+
+        taskList.appendChild(liElem);
+      }
+    </script>
+  </body>
+</html>
